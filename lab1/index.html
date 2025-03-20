@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор бомба</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор характеристик ромба</h1>
+        
+        <img id="rhombusImage" src="romb.png" alt="Ромб">
+
+        <div class="input-type">
+            <label>
+                <input type="radio" name="inputType" value="diagonals" checked> Диагонали
+            </label>
+            <label>
+                <input type="radio" name="inputType" value="sideAndAngle"> Сторона и угол
+            </label>
+            <button id="showButton">Показать</button>
+        </div>
+
+
+        <div class="input-fields">
+            <div id="diagonalsInput">
+                <label for="d1">Диагональ 1 (d1):</label>
+                <input type="number" id="d1" placeholder="Введите d1">
+                <label for="d2">Диагональ 2 (d2):</label>
+                <input type="number" id="d2" placeholder="Введите d2">
+            </div>
+            <div id="sideAndAngleInput" style="display: none;">
+                <label for="side">Сторона (a):</label>
+                <input type="number" id="side" placeholder="Введите a">
+                <label for="angle">Угол (α):</label>
+                <input type="number" id="angle" placeholder="Введите α">
+            </div>
+        </div>
+
+        <div class="calculations">
+            <label><input type="checkbox" id="perimeterCheckbox"> Периметр</label>
+            <label><input type="checkbox" id="areaCheckbox"> Площадь</label>
+            <label><input type="checkbox" id="heightCheckbox"> Высоты</label>
+        </div>
+
+        <button id="calculateButton">Вычислить</button>
+        <button id="clearButton">Очистить</button>
+
+        <div class="results">
+            <h2>Результаты:</h2>
+            <p id="perimeterResult"></p>
+            <p id="areaResult"></p>
+            <p id="heightResult"></p>
+        </div>
+
+        <div id="errorContainer" class="error"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

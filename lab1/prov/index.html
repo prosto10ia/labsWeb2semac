@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <h3>Языки программирования</h3>
+   <ul>
+      <li><a href="#">Python</a></li>
+      <li><a href="#">C</a></li>
+      <li><a href="#" id="test">Java</a></li>
+      <li><a href="#">JavaScript</a></li>
+   </ul>
+
+   <script>
+      let test = document.getElementById('test');
+      let helper = test.parentElement;
+
+      test.addEventListener('click', predAdd);
+
+      function predAdd() {
+         //alert(helper.tagName != 'BODY');
+         while (helper.tagName != 'document') {
+            console.log('sfdfsfsdfs');
+            let helper_2 = helper.firstElementChild;
+            let newElem = document.createElement(helper_2.tagName);
+            newElem.innerHTML = "новый элемент";
+            console.log(helper_2.innerHTML);
+            helper.prepend(newElem);
+            helper = helper.parentElement;
+         }
+      }
+   </script>
+</body>
+
+</html>
