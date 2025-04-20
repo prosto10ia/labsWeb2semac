@@ -1,0 +1,25 @@
+table {
+   margin: 0 auto;  
+}
+
+th {
+   background-color: rgb(176, 168, 168);
+}
+td {
+   background-color: #d8d6d6;
+}
+
+form {
+   display: inline-block;
+   margin: 50px auto;
+   border: solid thin black;
+   padding: 30px;
+}
+select {
+   width: 70px;
+}
+
+.formContainer {
+   display: flex;
+   justify-content: space-evenly;
+}
