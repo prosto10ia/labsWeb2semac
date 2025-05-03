@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <script src="http://d3js.org/d3.v7.min.js"> </script>
+   <title>План</title>
+</head>
+
+
+<body>
+   <header>
+      <h2>График посещение</h2>
+      <div class="links">
+         <nav>
+            <ul>
+               <li><a href="index.html">Главная</a></li>
+               <li><a href="gallery.html">Галерея</a></li>
+               <li><a href="table.html">План тренировок</a></li>
+            </ul>
+         </nav>
+      </div>
+   </header>
+
+   <main>
+      <section class="progress">
+         <h2>Прогресс Тренировок</h2>
+         <p>Следите за своим прогрессом и результатами тренировок.</p>
+         
+
+
+            <h3>Графики:</h3>
+            <form>
+            <h3 style="display: inline;">Значения по OX </h3><h3 style="display: inline;"> &nbsp; Результат</h3><br ><br >
+               <input type="radio" name="OX" value="calories" checked> Каллории<br>
+               <input type="radio" name="OX" value="pulse" > пульс<br>
+               <input type="radio" name="OX" value="time" > время<br><br>
+
+               <input type="checkbox" name="dat" value="max" checked> Максимальное значение<br>
+               <input type="checkbox" name="dat" value="min"> Минимальное знгачение<br><br>
+
+
+               <p>Тип графика 
+                  <select id="selectDiogram">
+                     <option value="dot">Точечная диаграмма</option>
+                     <option value="bar">Гастограмма</option>
+                     <option value="line">График</option>
+                  </select>
+               </p>
+               <input id='filterButton' type="button" value="Построить">
+               
+
+            </form>
+         <br><br><br><br><br>
+            <svg></svg>
+         <br><br><br><br><br>
+
+         <form id="filterForm">
+            <label>Тренировка: </label>
+            <input type="text" id="name"><br><br>
+        
+            <label for="likes_from">Время (от):</label>
+            <input type="text" id="likes_from">
+            <label for="likes_to">до:</label>
+            <input type="text" id="likes_to"><br><br>
+        
+            <label for="reposts_from">Калории (от):</label>
+            <input type="text" id="reposts_from">
+            <label for="reposts_to">до:</label>
+            <input type="text" id="reposts_to"><br><br>
+        
+            <label for="rating_from">Рейтинг (от):</label>
+            <input type="text" id="rating_from">
+            <label for="rating_to">до:</label>
+            <input type="text" id="rating_to"><br><br>
+        
+            <label for="views_from">Пульс (от):</label>
+            <input type="text" id="views_from">
+            <label for="views_to">до:</label>
+            <input type="text" id="views_to"><br><br>
+        
+            <button type="button" id="searchButt">Найти</button>
+            <button type="button" id="resetFilter">Сброс</button>
+        </form>
+        
+
+
+        <h3>Сортировка:</h3>
+
+        <form id="sortForm">
+            <label for="first_level">Первый уровень:</label>
+            <select id="first_level">
+                <option value="-1">Нет</option>
+                <option value="3">Время</option>
+                <option value="4">Калории</option>
+                <option value="5">Пульс</option>
+            </select>
+            <input type="checkbox" id="firstt_desc"> по убыванию?<br><br>
+        
+            <label for="second_level">Второй уровень:</label>
+            <select id="second_level" disabled>
+                <option value="-1">Нет</option>
+                <option value="3">Время</option>
+                <option value="4">Калории</option>
+                <option value="5">Пульс</option>
+            </select>
+            <input type="checkbox" id="second_desc"> по убыванию?<br><br>
+        
+            <label for="third_level">Третий уровень:</label>
+            <select id="third_level" disabled>
+                <option value="-1">Нет</option>
+                <option value="3">Время</option>
+                <option value="4">Калории</option>
+                <option value="5">Пульс</option>
+            </select>
+            <input type="checkbox" id="third_desc"> по убыванию?<br><br>
+        
+            <button type="submit">Сортировать</button>
+        </form>
+        
+
+        <table id="Table">
+         <thead>
+           <tr>
+             <th>№</th>
+             <th>Дата</th>
+             <th>Тренировка</th>
+             <th>Время (мин)</th>
+             <th>Калории</th>
+             <th>Пульс (ср.)</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr><td>1</td><td>01.09.2024</td><td>Бег</td><td>30</td><td>300</td><td>130</td></tr>
+           <tr><td>2</td><td>02.09.2024</td><td>Силовая тренировка</td><td>45</td><td>400</td><td>135</td></tr>
+           <tr><td>3</td><td>03.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>128</td></tr>
+           <tr><td>4</td><td>04.09.2024</td><td>Бокс</td><td>55</td><td>520</td><td>142</td></tr>
+           <tr><td>5</td><td>05.09.2024</td><td>Танцы</td><td>35</td><td>280</td><td>118</td></tr>
+           <tr><td>6</td><td>01.09.2024</td><td>HIIT</td><td>25</td><td>460</td><td>150</td></tr>
+           <tr><td>7</td><td>02.09.2024</td><td>Интервальный бег</td><td>30</td><td>380</td><td>138</td></tr>
+           <tr><td>8</td><td>03.09.2024</td><td>Пилатес</td><td>30</td><td>200</td><td>110</td></tr>
+           <tr><td>9</td><td>04.09.2024</td><td>Бег</td><td>35</td><td>400</td><td>145</td></tr>
+           <tr><td>10</td><td>05.09.2024</td><td>Силовая тренировка</td><td>30</td><td>350</td><td>135</td></tr>
+           <tr><td>11</td><td>01.09.2024</td><td>Велоспорт</td><td>60</td><td>600</td><td>140</td></tr>
+           <tr><td>12</td><td>02.09.2024</td><td>Йога</td><td>50</td><td>250</td><td>120</td></tr>
+           <tr><td>13</td><td>03.09.2024</td><td>Кроссфит</td><td>45</td><td>500</td><td>150</td></tr>
+           <tr><td>14</td><td>04.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>130</td></tr>
+           <tr><td>15</td><td>05.09.2024</td><td>Интервальный бег</td><td>30</td><td>380</td><td>138</td></tr>
+           <tr><td>16</td><td>01.09.2024</td><td>Пилатес</td><td>30</td><td>200</td><td>110</td></tr>
+           <tr><td>17</td><td>02.09.2024</td><td>Бег</td><td>40</td><td>420</td><td>144</td></tr>
+           <tr><td>18</td><td>03.09.2024</td><td>Йога</td><td>45</td><td>260</td><td>125</td></tr>
+           <tr><td>19</td><td>04.09.2024</td><td>Силовая тренировка</td><td>30</td><td>350</td><td>135</td></tr>
+           <tr><td>20</td><td>05.09.2024</td><td>Бег</td><td>35</td><td>400</td><td>145</td></tr>
+           <tr><td>21</td><td>01.09.2024</td><td>Йога</td><td>45</td><td>260</td><td>125</td></tr>
+           <tr><td>22</td><td>02.09.2024</td><td>Кроссфит</td><td>45</td><td>500</td><td>160</td></tr>
+           <tr><td>23</td><td>03.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>130</td></tr>
+           <tr><td>24</td><td>04.09.2024</td><td>Велоспорт</td><td>60</td><td>600</td><td>140</td></tr>
+           <tr><td>25</td><td>05.09.2024</td><td>Пилатес</td><td>30</td><td>200</td><td>110</td></tr>
+           <tr><td>26</td><td>01.09.2024</td><td>Бег</td><td>35</td><td>400</td><td>145</td></tr>
+           <tr><td>27</td><td>02.09.2024</td><td>Силовая тренировка</td><td>30</td><td>350</td><td>135</td></tr>
+           <tr><td>28</td><td>03.09.2024</td><td>Велоспорт</td><td>60</td><td>600</td><td>140</td></tr>
+           <tr><td>29</td><td>04.09.2024</td><td>Йога</td><td>45</td><td>260</td><td>125</td></tr>
+           <tr><td>30</td><td>05.09.2024</td><td>Силовая тренировка</td><td>30</td><td>350</td><td>135</td></tr>
+           <tr><td>31</td><td>01.09.2024</td><td>Бег</td><td>35</td><td>400</td><td>145</td></tr>
+           <tr><td>32</td><td>02.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>130</td></tr>
+           <tr><td>33</td><td>03.09.2024</td><td>Интервальный бег</td><td>30</td><td>380</td><td>138</td></tr>
+           <tr><td>34</td><td>04.09.2024</td><td>Пилатес</td><td>30</td><td>200</td><td>110</td></tr>
+           <tr><td>35</td><td>05.09.2024</td><td>Кроссфит</td><td>45</td><td>500</td><td>160</td></tr>
+           <tr><td>36</td><td>01.09.2024</td><td>Силовая тренировка</td><td>30</td><td>350</td><td>135</td></tr>
+           <tr><td>37</td><td>02.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>130</td></tr>
+           <tr><td>38</td><td>03.09.2024</td><td>Йога</td><td>45</td><td>260</td><td>125</td></tr>
+           <tr><td>39</td><td>04.09.2024</td><td>Бег</td><td>35</td><td>400</td><td>145</td></tr>
+           <tr><td>40</td><td>05.09.2024</td><td>Интервальный бег</td><td>30</td><td>380</td><td>138</td></tr>
+           <tr><td>41</td><td>01.09.2024</td><td>Кроссфит</td><td>45</td><td>500</td><td>150</td></tr>
+           <tr><td>42</td><td>02.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>130</td></tr>
+           <tr><td>43</td><td>03.09.2024</td><td>Велоспорт</td><td>60</td><td>600</td><td>140</td></tr>
+           <tr><td>44</td><td>04.09.2024</td><td>Пилатес</td><td>30</td><td>200</td><td>110</td></tr>
+           <tr><td>45</td><td>05.09.2024</td><td>Йога</td><td>45</td><td>260</td><td>125</td></tr>
+           <tr><td>46</td><td>01.09.2024</td><td>Силовая тренировка</td><td>30</td><td>350</td><td>135</td></tr>
+           <tr><td>47</td><td>02.09.2024</td><td>Бег</td><td>35</td><td>400</td><td>145</td></tr>
+           <tr><td>48</td><td>03.09.2024</td><td>Плавание</td><td>40</td><td>350</td><td>130</td></tr>
+           <tr><td>49</td><td>04.09.2024</td><td>Интервальный бег</td><td>30</td><td>380</td><td>138</td></tr>
+           <tr><td>50</td><td>05.09.2024</td><td>Пилатес</td><td>30</td><td>200</td><td>110</td></tr>
+         </tbody>
+       </table>
+       
+       
+      </section>
+   </main>
+
+   <script src="sort.js"></script>
+   <script src="filter.js"></script>
+</body>
+
+</html>

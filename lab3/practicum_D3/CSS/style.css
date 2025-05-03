@@ -1,0 +1,16 @@
+.container {
+   display: flex;
+}
+
+p, #cleanButton, #drowButton {
+   margin: 15px;
+}
+
+
+.line {
+   display: flex;
+}
+
+.hidden {
+   display: none;
+}

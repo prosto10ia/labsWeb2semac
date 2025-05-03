@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+   <head>
+      <meta charset="utf-8">
+      <title>Лабораторная работа 4</title>
+      <link rel='stylesheet' href="CSS/style.css"/>
+      <script src="http://d3js.org/d3.v7.min.js"> </script>
+      
+   </head>
+
+   <body>
+      <form id="setting" >
+         <div class="container">
+            <p>Время анимации<br><br>
+               <label for="time">в миллисек: </label>
+               <input type="number" id="time" value="1000" max=100000 min=0>
+            </p>
+
+            <p id="scale">Масштаб<br><br>
+               <label for="sx">x от: </label>
+               <input type="number" id="sx" value="1" max=15 min=-15>
+               <label for="sx_finish">до : </label>  
+               <input type="number" id="sx_finish" value="2" max=15 min=-15>
+            <br>   
+               <label for="sy">y от: </label>
+               <input type="number" id="sy" value="1" max=15 min=-15>
+               <label for="sy_finish">до : </label>                    
+               <input type="number" id="sy_finish" value="3" max=15 min=-15>
+            </p>
+
+            <p id="rotate">Поворот<br><br>
+               <label for="r">y от: </label>
+               <input type="number" id="r" value="0" max=360 min=-360>
+               <label for="r">до : </label>  
+               <input type="number" id="r_finish" value="90" max=360 min=-360>
+         </div>
+            
+            
+         <input type="button" id="startButton" value="Начать">
+         <input type="button" id="cleanButton" value="Отчистить">
+         
+      </form>
+
+      <svg></svg>
+
+      <script src="JavaScript/main.js"></script>
+      <script src="JavaScript/image.js"></script>
+   </body>
+</html>
