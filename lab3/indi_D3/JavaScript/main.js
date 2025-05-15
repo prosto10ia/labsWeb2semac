@@ -10,16 +10,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   let runAnimation = (dataForm) => {
-   d3.select("svg").selectAll('*').remove();
+   //d3.select("svg").selectAll('*').remove();
    const svg = d3.select("svg");
    let pict = drawSmile(svg);
    let path = drawPath();
 
+
+   const easeSel = {
+      linear:  d3.easeLinear,
+      elastic: d3.easeElastic,
+      bounce:  d3.easeBounce,
+   }[document.getElementById('selectAnimation').value] ?? d3.easeLinear;
+
    let translate = translateAlong(path.node());
 
    pict.transition()
-       .duration(+dataForm.time.value)
-       .attrTween('transform', translateAlong(path.node()));
+      .ease(easeSel)
+      .duration(+dataForm.time.value)
+      .attrTween('transform', translateAlong(path.node()));
 };
 
 
@@ -29,17 +37,17 @@ function createPath() {
    const height = svg.attr("height")
    let data = [];
    const padding = 100;
-   //начальное положение рисунка
+
    let posX = 500;
    let posY = 100;
    const h = 5;
-   // координаты y - увеличиваються, x - уменьшаються
+
    while (posY < 500) {
    data.push( {x: posX, y: posY});
    posY += 3*h;
    posX -= h;
    }
-   // координаты y - уменьшаються, x - уменьшаються
+
    while (posY > 100) {
    data.push( {x: posX, y: posY});
    posY -= 3*h;
@@ -48,19 +56,20 @@ function createPath() {
    return data
   }
 let drawPath =() => {
-   // создаем массив точек пути в зависимости от параметра
+
    const dataPoints = createPath();
    const line = d3.line()
       .x((d) => d.x)
       .y((d) => d.y);
-   // создаем путь на основе массива точек
+
    const path = d3.select('svg').append('path')
-   .attr('d', line(dataPoints))
-   .attr('stroke', 'none')
-   .attr('fill', 'none');
+      .attr('d', line(dataPoints))
+      .attr('stroke', 'none')
+      .attr('fill', 'none');
   
    return path;
   }
+
 function translateAlong(path) {
       const dataForm = document.getElementById("setting");
       const length = path.getTotalLength();
