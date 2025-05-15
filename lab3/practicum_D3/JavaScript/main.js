@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function() {
       pict.attr("transform", `translate(${width / 2}, ${height / 2}) scale (1.5) rotate(180)`);
   });
 
+  d3.selectAll('.do').attr('class', 'do hidden');
+  d3.selectAll('.moveByPath').attr('class', 'moveByPath hidden');
+
 
 let draw = (dataForm) => {
    const svg = d3.select("svg")
@@ -20,33 +23,35 @@ let draw = (dataForm) => {
 
 let runAnimation = (dataForm) => {
    const svg = d3.select("svg")
-   let pict = drawSmile(svg);
+   const pict = drawSmile(svg);
+
+   const easeSel = {
+      linear:  d3.easeLinear,
+      elastic: d3.easeElastic,
+      bounce:  d3.easeBounce,
+   }[document.getElementById('selectAnimation').value] ?? d3.easeLinear;
 
    if (!document.getElementById('pathA').checked) {
-      d3.select("svg").selectAll('*').remove();
-      const svg = d3.select("svg")
-      let pict = drawSmile(svg);
-      let sel;
-      const select = document.getElementById('selectAnimation').options[document.getElementById('selectAnimation').selectedIndex].text;
-      if (select == 'linear') sel = d3.easeLinear;
-      else if (select == 'elastic') sel = d3.easeElastic;
-      else sel = d3.easeBounce;
 
       pict
          .attr("transform", `translate(${dataForm.cx.value}, ${dataForm.cy.value}) rotate(${dataForm.r.value}) scale (${dataForm.sx.value}, ${dataForm.sy.value})`)
          .transition(svg)
          .duration(6000)
-         .ease(sel)
+         .ease(easeSel)
          .attr("transform", `translate(${dataForm.cx_finish.value}, ${dataForm.cy_finish.value}) rotate(${dataForm.r_finish.value}) scale (${dataForm.sx_finish.value}, ${dataForm.sy_finish.value})`);
    } else {
-      d3.select("svg").selectAll('*').remove();
-      const svg = d3.select("svg")
-      let pict = drawSmile(svg);
       let path = drawPath(document.getElementById('pathAni').selectedIndex);
       pict.transition()
       .ease(d3.easeLinear) // установить в зависимости от настроек
       .duration(6000)
-      .attrTween('transform', translateAlong(path.node()));
+      .ease(easeSel)
+      .attrTween('transform', translateAlong(
+         path.node(),
+         +dataForm.r.value,       +dataForm.r_finish.value,
+         [+dataForm.sx.value, +dataForm.sy.value],
+         [+dataForm.sx_finish.value, +dataForm.sy_finish.value],
+         path.node().getTotalLength()
+      ));
       }
 }
 
@@ -103,14 +108,15 @@ function createPathG() {
   
    return path;
   }
-  function translateAlong(path) {
-      const length = path.getTotalLength();
-      return function() {
-         return function(t) {
-            const {x, y} = path.getPointAtLength(t * length);
-            return `translate(${x},${y})`;
-         }
-      }
+  function translateAlong(path, r0, r1, s0, s1, length) {
+      const rot  = d3.interpolateNumber(r0,  r1);
+      const sx   = d3.interpolateNumber(s0[0], s1[0]);
+      const sy   = d3.interpolateNumber(s0[1], s1[1]);
+
+      return () => t => {
+         const p = path.getPointAtLength(t * length);
+         return `translate(${p.x},${p.y}) rotate(${rot(t)}) scale(${sx(t)},${sy(t)})`;
+      };
   }
 
 
@@ -121,13 +127,18 @@ document.getElementById('animation').addEventListener('change', function() {
       d3.select('#animationButton').attr('class', ' ');
       d3.select('#cleanButton').attr('class', 'hidden');
       d3.select('#drowButton').attr('class', 'hidden');
+      d3.selectAll('.do').attr('class', 'do');
+      d3.selectAll('.moveByPath').attr('class', 'moveByPath');
 
-      d3.select("svg").selectAll('*').remove();
+
    } else {
       d3.select('#selectAnimation').attr('class', 'hidden');
       d3.select('#animationButton').attr('class', 'hidden');
       d3.select('#cleanButton').attr('class', ' ');
       d3.select('#drowButton').attr('class', '');
+      d3.selectAll('.do').attr('class', 'do hidden');
+      d3.selectAll('.moveByPath').attr('class', 'moveByPath hidden');
+
 
    }
 });
@@ -136,17 +147,16 @@ document.getElementById('pathA').addEventListener('change', function() {
    if (isIt){
       d3.select('#pathAn').attr('class', ' ');
       d3.select('#notPathAn').attr('class', 'hidden');
-      d3.select('#selectAnimation').attr('class', 'hidden');
-      d3.select('#scale').attr('class', 'hidden');
-      d3.select('#rotate').attr('class', 'hidden');
+      //d3.select('#selectAnimation').attr('class', 'hidden');
+      //d3.select('#scale').attr('class', 'hidden');
+      //d3.select('#rotate').attr('class', 'hidden');
 
-      d3.select("svg").selectAll('*').remove();
    } else {
       d3.select('#pathAn').attr('class', 'hidden');
       d3.select('#notPathAn').attr('class', ' ');
-      d3.select('#selectAnimation').attr('class', ' ');
-      d3.select('#scale').attr('class', '');
-      d3.select('#rotate').attr('class', '');
+      //d3.select('#selectAnimation').attr('class', ' ');
+      //d3.select('#scale').attr('class', '');
+      //d3.select('#rotate').attr('class', '');
 
    }
 });

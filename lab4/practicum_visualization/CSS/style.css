@@ -1,47 +1,24 @@
+svg {
+   width: 1000px;
+   height: 600px;
+}
+
 .hidden {
    display: none;
 }
 
-
-#build {
-   border-collapse: collapse;
-   width: 100%;
-   font-family: Arial, sans-serif;
-   font-size: 14px;
-   text-align: left;
-   margin: 10px auto;
- }
- #build th, #build td {
-   border: 1px solid #888;
-   padding: 8px 10px;
- }
- #build th {
-   background-color: #d3d3d3;
-   font-weight: bold;
-   text-align: center;
- }
- #build td {
-   background-color: #f0efef;
- }
- #build tr:nth-child(even) td {
-   background-color: #ffffff;
+table {
+   border-collapse: collapse;     
  }
 
-
- svg {
-   width: 800px;
-   height: 400px;
-   margin:  30px auto; 
-   display: block;
-}
-svg path, line {
-   fill: none;
-   width: 1px;
-}
-   svg text {
-   font: 8px Verdana;
+table th,
+table td {
+  border: 1px solid #000000;   
+  padding: 6px 10px;  
+  margin: 0;          
 }
 
-
-
+table tbody tr:nth-child(even) {
+  background: #c3c3c3;          
+}
  
