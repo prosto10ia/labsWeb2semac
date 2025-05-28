@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.panel {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  display: inline-block;
+  vertical-align: top;
+}
+.panel * {
+   margin: 5px;
+}
+table {
+  width: 90%;
+  margin: 16px auto;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 6px 8px;
+  text-align: left;
+}
+th {
+  background: #eee;
+}
+.controls {
+  text-align: center;
+  margin: 16px;
+}
+
+.visualization {
+  margin: 24px auto;
+  width: 90%;
+  border: 1px solid #ccc;
+}
+
+.visualization * {
+   margin: 10px;
+}
+
+.visualization-error {
+  color: red;
+  margin-top: 8px;
+}
+

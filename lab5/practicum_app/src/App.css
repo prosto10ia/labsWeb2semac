@@ -1,0 +1,29 @@
+
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  padding:0;
+}
+.panel{
+  border:1px solid #ccc;
+  padding:20px;
+  margin:20px;
+  display:inline-block;
+}
+table{
+  width: 90%;
+  margin:20px auto;
+  border-collapse: collapse;
+}
+th,td{
+  border:1px solid #999;
+  padding:6px 8px;
+  text-align:left;
+}
+th{
+  background:#eee;
+}
+.controls{
+  text-align:center;
+  margin:20px;
+}

@@ -1,0 +1,63 @@
+body {
+   padding: 5%;
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fafafa;
+}
+
+th, td {
+  border: 1px solid #000000;
+  padding: 8px 12px;
+}
+
+th {
+  background: #cfd0d1;
+}
+
+.show { display: table-row; }
+.hide { display: none; }
+
+
+
+.numPages span {
+  cursor: pointer;
+  user-select: none;
+  padding: 5px;
+}
+
+.numPages .active {
+  font-weight: bold;
+  border-color: black;
+}
+
+.filter {
+   margin: 50px 0;
+}
+
+
+.filter label {
+  display: inline-block;
+  width: 120px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.filter input {
+  margin-bottom: 8px;
+}
+
+.filter button {
+  margin-right: 10px;
+  padding: 6px 12px;
+}
+
+
+.visualization * {
+   margin: 10px;
+ }
+
+
